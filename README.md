@@ -1,6 +1,3 @@
-------------Actividad Blog Grupo 10 -------------------
+------------Actividad credencial -------------------
 
-* Mateo Valencia
-* Luisa Sanchez
-* Diana Dimate
 * Santiago López 
