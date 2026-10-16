@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --pixel-bg: #12131c;
+    --pixel-card: #1e1e2f;
+    --pixel-border: #ffffff;
+    --pixel-cyan: #00f0ff;
+    --pixel-pink: #ff0055;
+    --pixel-yellow: #f3e600;
+    --pixel-green: #00ff66;
+    --pixel-gray: #8b9bb4;
+    --shadow: 8px 8px 0px #000000;
+}
+
+* { box-sizing: border-box; image-rendering: pixelated; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: grid;
+    place-items: center;
+    font-family: "Share Tech Mono", monospace;
+    color: #ffffff;
+    background: var(--pixel-bg);
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.page {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.page-heading { text-align: center; }
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--pixel-yellow);
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.page-heading h1 { 
+    margin: 12px 0 8px; 
+    color: var(--pixel-cyan); 
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(16px, 3.5vw, 24px); 
+    text-shadow: 3px 3px 0px #000;
+}
+.page-heading p { margin: 0; color: var(--pixel-gray); font-size: 13px; }
+
+.card-scene { width: 100%; max-width: 650px; perspective: 1200px; }
+.card-toggle { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.id-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.586 / 1;
+    min-height: 360px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.card-toggle:checked + .id-card { transform: rotateY(180deg); }
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 4px solid #ffffff;
+    box-shadow: var(--shadow);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: var(--pixel-card);
+}
+
+/* Patrón de líneas retro de fondo tipo CRT */
+.card-face::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(rgba(18, 19, 28, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+    background-size: 100% 4px;
+    z-index: 10;
+    opacity: 0.6;
+}
+
+.card-front { color: #ffffff; }
+
+.top-band { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 12px; 
+    padding: 14px 20px; 
+    background: #090a0f; 
+    border-bottom: 4px solid #ffffff;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-symbol { 
+    padding: 6px 8px; 
+    color: #000; 
+    background: var(--pixel-yellow); 
+    font-family: "Press Start 2P", monospace;
+    font-size: 8px;
+    border: 2px solid #fff;
+}
+.brand-copy strong { display: block; font-family: "Press Start 2P", monospace; font-size: 10px; color: var(--pixel-cyan); }
+.brand-copy span { display: block; margin-top: 4px; color: var(--pixel-gray); font-size: 10px; }
+
+.edition { text-align: right; }
+.edition span { display: block; color: var(--pixel-pink); font-family: "Press Start 2P", monospace; font-size: 8px; }
+.edition strong { display: block; margin-top: 4px; font-size: 10px; }
+
+.pixel-stripe { 
+    height: 8px; 
+    background: linear-gradient(90deg, 
+        var(--pixel-pink) 0% 25%, 
+        var(--pixel-yellow) 25% 50%, 
+        var(--pixel-cyan) 50% 75%, 
+        var(--pixel-green) 75% 100%);
+    border-bottom: 2px solid #000;
+}
+
+.front-content { position: relative; padding: 18px 20px; z-index: 2; }
+.identity-grid { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; align-items: start; }
+
+.field-label { display: block; margin-bottom: 4px; color: var(--pixel-gray); font-size: 10px; text-transform: uppercase; }
+
+.person-name { 
+    margin: 0 0 10px; 
+    color: #fff; 
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(9px, 1.8vw, 13px); 
+    line-height: 1.4; 
+}
+
+.professional-role { 
+    display: inline-block; 
+    margin-bottom: 12px; 
+    padding: 4px 8px; 
+    border: 2px solid var(--pixel-green); 
+    color: var(--pixel-green); 
+    background: rgba(0,255,102,0.1); 
+    font-size: 10px; 
+}
+
+.data-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.data-value { display: block; color: var(--pixel-yellow); font-size: 12px; font-weight: bold; }
+
+.address-block { margin-top: 10px; padding-top: 8px; border-top: 2px dashed rgba(255,255,255,0.2); }
+.address-block .data-value { font-size: 11px; color: #fff; }
+
+/* Contenedor de la foto de perfil */
+.portrait {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffffff;
+    background: #000000;
+    overflow: hidden;
+}
+
+.user-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    filter: contrast(1.1) saturate(1.1);
+}
+
+.portrait-caption { 
+    position: absolute; 
+    bottom: 2px; 
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 2px 0;
+    color: var(--pixel-cyan); 
+    font-family: "Press Start 2P", monospace; 
+    font-size: 6px; 
+}
+
+.card-footer { position: relative; display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 8px; border-top: 2px solid #fff; font-size: 10px; }
+.footer-code { color: var(--pixel-gray); }
+.status { display: inline-flex; align-items: center; gap: 6px; color: var(--pixel-green); font-size: 9px; }
+.status-dot { width: 6px; height: 6px; background: var(--pixel-green); box-shadow: 0 0 4px var(--pixel-green); }
+
+/* CARA TRASERA */
+.card-back {
+    transform: rotateY(180deg);
+    padding: 20px;
+    background: #141421;
+    color: #fff;
+    z-index: 2;
+}
+.back-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; border-bottom: 2px solid #fff; }
+.back-header h2 { margin: 0; font-family: "Press Start 2P", monospace; font-size: 11px; color: var(--pixel-yellow); }
+.back-badge { padding: 4px 6px; border: 2px solid var(--pixel-cyan); color: var(--pixel-cyan); font-size: 9px; }
+
+.tech-section { margin-top: 12px; }
+.tech-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tech-tag { padding: 5px 8px; border: 2px solid #fff; color: #fff; background: rgba(255,255,255,0.1); font-size: 10px; }
+
+.quote-block { margin-top: 12px; padding: 10px; border-left: 4px solid var(--pixel-pink); background: rgba(255,0,85,0.1); }
+.quote-block blockquote { margin: 0; color: #fff; font-size: 11px; font-style: italic; }
+
+.back-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.back-detail .field-label { color: var(--pixel-gray); }
+.back-detail p { margin: 0; font-size: 10px; overflow-wrap: anywhere; }
+.back-detail a { color: var(--pixel-cyan); text-decoration: none; }
+.back-detail a:hover { text-decoration: underline; }
+
+.back-bottom { position: absolute; right: 20px; bottom: 14px; left: 20px; display: flex; justify-content: space-between; padding-top: 8px; border-top: 2px dashed rgba(255,255,255,0.2); color: var(--pixel-gray); font-size: 8px; }
+
+.card-controls { display: flex; justify-content: center; }
+.flip-button { 
+    padding: 12px 20px; 
+    border: 3px solid #fff; 
+    border-radius: 0;
+    color: #000; 
+    background: var(--pixel-cyan); 
+    box-shadow: 4px 4px 0px #000;
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px; 
+    cursor: pointer; 
+    transition: transform 0.1s; 
+}
+.flip-button:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
+.flip-button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; }
+
+.page-note { max-width: 450px; color: var(--pixel-gray); text-align: center; font-size: 11px; }
+
+@media (max-width: 600px) {
+    .identity-grid { grid-template-columns: 90px minmax(0, 1fr); gap: 10px; }
+    .person-name { font-size: 9px; }
+    .data-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
